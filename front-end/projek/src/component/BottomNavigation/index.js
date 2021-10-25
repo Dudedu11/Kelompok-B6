@@ -66,7 +66,5 @@ const styles = StyleSheet.create({
         paddingVertical:15,
         borderTopLeftRadius: 29,
         borderTopRightRadius: 29
-        // paddingTop: 26,
-        // paddingBottom: 21,
     }
 })
