@@ -1,28 +1,13 @@
 import React from 'react'
-import { StyleSheet } from 'react-native'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import Create from '../create'
-import Edit from '../edit'
-import Detail from '../detail'
-import ListTips from '../listtips'
-
-const RootStack = createNativeStackNavigator()
+import { StyleSheet, Text, View } from 'react-native'
 
 const Safety = () => {
     return (
-        <RootStack.Navigator style={styles.page}>
-            <RootStack.Screen name="ListTips" component={ListTips} options={{ headerShown: false }} />
-            <RootStack.Screen name="Detail" component={Detail} options={{ headerShown: false }} />
-            <RootStack.Screen name="Create" component={Create} options={{ headerShown: false }} />
-            <RootStack.Screen name="Edit" component={Edit} options={{ headerShown: false }} />
-        </RootStack.Navigator>
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }} >
+            <Text>Safety</Text>
+        </View>
     )
 }
 
 export default Safety
-
-const styles = StyleSheet.create({
-    page: {
-        flex: 1,
-    },
-})
+const styles = StyleSheet.create({})

@@ -1,7 +1,12 @@
 import React from 'react'
-import { StyleSheet, Text, View,ScrollView } from 'react-native'
-import Message from '../../assets/icons/message.svg';
-import Post from '../../assets/icons/post.svg';
+import { StyleSheet, Text, Button, Alert, SafeAreaView, View,ScrollView, Image, TouchableNativeFeedback } from 'react-native'
+import {
+ Message,
+ Post,
+ LikeFalse,
+ LikeTrue
+} from '../../assets'
+
 import {
     Header,
     LearnMoreLinks,

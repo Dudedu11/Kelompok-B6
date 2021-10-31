@@ -8,7 +8,5 @@ const Toolbar = () => {
         </View>
     )
 }
-
 export default Toolbar
-
 const styles = StyleSheet.create({})
