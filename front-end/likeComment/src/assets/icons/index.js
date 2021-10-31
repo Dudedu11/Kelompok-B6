@@ -5,7 +5,7 @@ import IconSearchActive from './searchAktif.svg';
 import IconToolbar from './home.svg';
 import IconSafety from './Diamond.svg';
 import IconSafetyActive from './diamondAktif.svg';
-import IconProfil from './User.svg';
+import IconProfil from './profile.svg';
 import IconProfilActive from './profileAktif.svg';
 import IconAdd from './add.svg';
 import IconArrowLeft from './arrowLeft.svg';

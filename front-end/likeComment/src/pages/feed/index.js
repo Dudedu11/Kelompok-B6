@@ -1,5 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View,ScrollView } from 'react-native'
+import Message from '../../assets/icons/message.svg';
+import Post from '../../assets/icons/post.svg';
 import {
     Header,
     LearnMoreLinks,
@@ -13,23 +15,48 @@ const Feed = () => {
         
         <ScrollView>
             <View style={[styles.content]}>
-            <View style={[styles.box]}></View>
-            <View style={[styles.box]}></View>
-            <View style={[styles.box]}></View>
-            <View style={[styles.box]}></View>
-            <View style={[styles.box]}></View>
-            <View style={[styles.box]}></View>
-            <View style={[styles.box]}></View>
-            <View style={[styles.box]}></View>
-            <View style={[styles.box]}></View>
-            <View style={[styles.box]}></View>
-            <View style={[styles.box]}></View>
-            <View style={[styles.box]}></View>
+            <View style={[styles.box]}>
+            <Post height = {210}  marginTop = {10} marginLeft = {5} position = 'absolute'  /> 
+            </View>
+            <View style={[styles.box]}>
+            <Post height = {210}  marginTop = {10} marginLeft = {5} position = 'absolute'  /> 
+            </View>
+            <View style={[styles.box]}>
+            <Post height = {210}  marginTop = {10} marginLeft = {5} position = 'absolute'  /> 
+            </View>
+            <View style={[styles.box]}>
+            <Post height = {210}  marginTop = {10} marginLeft = {5} position = 'absolute'  /> 
+            </View>
+            <View style={[styles.box]}>
+            <Post height = {210}  marginTop = {10} marginLeft = {5} position = 'absolute'  /> 
+            </View>
+            <View style={[styles.box]}>
+            <Post height = {210}  marginTop = {10} marginLeft = {5} position = 'absolute'  /> 
+            </View>
+            <View style={[styles.box]}>
+            <Post height = {210}  marginTop = {10} marginLeft = {5} position = 'absolute'  /> 
+            </View>
+            <View style={[styles.box]}>
+            <Post height = {210}  marginTop = {10} marginLeft = {5} position = 'absolute'  /> 
+            </View>
+            <View style={[styles.box]}>
+            <Post height = {210}  marginTop = {10} marginLeft = {5} position = 'absolute'  /> 
+            </View>
+            <View style={[styles.box]}>
+            <Post height = {210}  marginTop = {10} marginLeft = {5} position = 'absolute'  /> 
+            </View>
+            <View style={[styles.box]}>
+            <Post height = {210}  marginTop = {10} marginLeft = {5} position = 'absolute'  /> 
+            </View>
+            <View style={[styles.box]}>
+            <Post height = {210}  marginTop = {10} marginLeft = {5} position = 'absolute'  /> 
+            </View>
           </View>
         </ScrollView>
         <View style={[styles.header]}>
-          <Text style={styles.sectionTitle}>Feed</Text>
-
+        <Text style={styles.sectionTitle}>Feed
+        </Text>
+        <Message height = {24}  marginTop = {15} marginLeft = {295} position = 'absolute' />  
         </View>
        </View>
     )
@@ -49,25 +76,15 @@ const styles = StyleSheet.create({
       left: 0,
       right: 0,
       top: 0,
+      bottom : 10,
       backgroundColor: '#FFFFFF',
-      borderBottomColor : '#A9A9A9',
-      zIndex: 10
+      borderBottomColor : 'F8F8FF',
     },
     content: {
       alignItems: 'center',
       marginTop: 50,
       marginBottom: 40,
       backgroundColor: '#F8F8FF'
-    },
-    footer: {
-      height: 70,
-      position: 'absolute',
-      left: 0,
-      right: 0,
-      bottom: 0,
-      borderRadius: 50,
-      backgroundColor: '#1E90FF'
-  
     },
     box: {
       width: 330,
@@ -83,12 +100,4 @@ const styles = StyleSheet.create({
       marginLeft: 30,
       color: Colors.black
     },
-    sectionTitleBottom : {
-      fontSize: 24,
-      fontWeight: '600',
-      marginBottom: 12,
-      marginLeft: 30,
-      color: Colors.black
-  
-    }
   });
