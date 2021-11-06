@@ -53,14 +53,31 @@ func initDb() {
 		config[dbuser], config[dbpass], config[dbname])
 
 	db, err = sql.Open("postgres", psqlInfo)
-	if err != nil {
-		panic(err)
-	}
+
+	defer db.Close()
+
+	insertStmt := `insert into "feed_like" ("jml_like") values (21)`
+	_, e := db.Exec(insertStmt)
+	CheckError(e)
+
+	// insertDynStmt := `insert into "feed_like" ("Jumlah_Like") values ($1)`
+	// _, e = db.Exec(insertDynStmt, "Aku", 03)
+	// CheckError(e)
+
+	// if err != nil {
+	// 	panic(err)
+	// }
 	err = db.Ping()
 	if err != nil {
 		panic(err)
 	}
 	fmt.Println("Successfully connected!")
+}
+
+func CheckError(err error) {
+	if err != nil {
+		panic(err)
+	}
 }
 
 func dbConfig() map[string]string {

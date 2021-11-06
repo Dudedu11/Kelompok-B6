@@ -5,7 +5,7 @@ type MLikeRequest struct {
 }
 
 type MLikeResponse struct {
-	MESSAGE string `json:"message"`
+	MESSAGE string `json:"like"`
 }
 
 type guidelinesActive struct {
