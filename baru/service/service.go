@@ -2,6 +2,7 @@ package service
 
 import (
 	fmt "fmt"
+
 )
 
 func MLike(name string) string {
@@ -15,3 +16,5 @@ func MLike(name string) string {
 	helloOutput = fmt.Sprintf("%d", like)
 	return helloOutput
 }
+
+

@@ -20,7 +20,7 @@ const (
 	dbhost = "localhost"
 	dbport = "5432"
 	dbuser = "postgres"
-	dbpass = "virgo02"
+	dbpass = "jeje2525"
 	dbname = "like_db"
 )
 
@@ -56,12 +56,64 @@ func initDb() {
 	if err != nil {
 		panic(err)
 	}
+	insertStmt := `insert into "feed_like" ("jml_like") values(25)`
+	_, e := db.Exec(insertStmt)
+	CheckError(e)
+
+	insertDynStmt := `insert into "feed_like" ("jml_like") values($1)`
+	_, e = db.Exec(insertDynStmt, 30)
+	CheckError(e)
+
+	sqlQueryRow() 
+	
 	err = db.Ping()
 	if err != nil {
 		panic(err)
 	}
 	fmt.Println("Successfully connected!")
 }
+
+
+func CheckError(err error) {
+	if err != nil {
+		panic(err)
+	}
+}
+
+
+
+func sqlQueryRow() int {
+   
+    var jml_like  int = 100
+    err := db.
+        QueryRow("select jumlah_like from feed_like where jumlah_like = ?", jml_like).
+        Scan(&jml_like)
+    if err != nil {
+        panic(err)
+    }
+
+    fmt.Printf("jumlah like: %d\n",jml_like)
+	return jml_like
+}
+
+
+/*
+func SelectLike(jml_like int) int {
+	var jumlah_like int 
+	sqlStatement := `SELECT jml_like FROM feed_like;`
+	row := db.QueryRow(sqlStatement, 3)
+	switch err := row.Scan(&jumlah_like); err {
+	case sql.ErrNoRows:
+  	fmt.Println("No rows were returned!")
+	case nil:
+  	fmt.Println(jumlah_like)
+	default:
+  	panic(err)
+	}
+	return jumlah_like
+}
+*/
+
 
 func dbConfig() map[string]string {
 	conf := make(map[string]string)
@@ -91,7 +143,7 @@ func dbConfig() map[string]string {
 	conf[dbhost] = "localhost"
 	conf[dbport] = "5432"
 	conf[dbuser] = "postgres"
-	conf[dbpass] = "virgo02"
+	conf[dbpass] = "jeje2525"
 	conf[dbname] = "like_db"
 	return conf
 }
