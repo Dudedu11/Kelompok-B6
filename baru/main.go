@@ -53,9 +53,25 @@ func initDb() {
 		config[dbuser], config[dbpass], config[dbname])
 
 	db, err = sql.Open("postgres", psqlInfo)
+
+	defer db.Close()
+
+	insertStmt := `insert into "feed_like" ("jml_like") values (21)`
+	_, e := db.Exec(insertStmt)
+	CheckError(e)
+
+	// insertDynStmt := `insert into "feed_like" ("Jumlah_Like") values ($1)`
+	// _, e = db.Exec(insertDynStmt, "Aku", 03)
+	// CheckError(e)
+
+	// if err != nil {
+	// 	panic(err)
+	// }
+	err = db.Ping()
 	if err != nil {
 		panic(err)
 	}
+<<<<<<< HEAD
 	insertStmt := `insert into "feed_like" ("jml_like") values(25)`
 	_, e := db.Exec(insertStmt)
 	CheckError(e)
@@ -67,10 +83,15 @@ func initDb() {
 	sqlQueryRow() 
 	
 	err = db.Ping()
+=======
+	fmt.Println("Successfully connected!")
+}
+
+func CheckError(err error) {
+>>>>>>> 5ae0173a4bfb7ff986a9ab3c4cbd97d7683f3216
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println("Successfully connected!")
 }
 
 

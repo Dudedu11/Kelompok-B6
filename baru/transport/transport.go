@@ -39,7 +39,7 @@ func call_ServiceMLike(name string) string {
 func makeMLikeEndpoint(aph AphService) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
 		req := request.(datastruct.MLikeRequest)
-		logging.Log(fmt.Sprintf("Name Request %s", req.NAME))
+		logging.Log(fmt.Sprintf("Like Request %s", req.NAME))
 		v := aph.MLikeService(ctx, req.NAME)
 		logging.Log(fmt.Sprintf("Response Final Message %s", v))
 		return datastruct.MLikeResponse{v}, nil
