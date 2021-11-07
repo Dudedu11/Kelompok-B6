@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"net/http"
 
+	"aph-go-service-master/database"
 	"aph-go-service-master/datastruct"
 	"aph-go-service-master/logging"
 	"aph-go-service-master/service"
@@ -30,7 +31,8 @@ func (aphService) MLikeService(_ context.Context, name string) string {
 
 func call_ServiceMLike(name string) string {
 
-	Like := service.MLike(name)
+	jmlLike := database.SelectLike()
+	Like := service.Mlike(name, jmlLike)
 
 	return Like
 
@@ -68,4 +70,8 @@ func RegisterHttpsServicesAndStartListener() {
 	)
 
 	http.Handle("/MLike", MLikeHandler)
+}
+
+func GetInitDb() {
+	database.InitDb()
 }

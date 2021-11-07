@@ -1,7 +1,7 @@
 package datastruct
 
 type MLikeRequest struct {
-	NAME string `json:"name"`
+	NAME string `json:"klik"`
 }
 
 type MLikeResponse struct {

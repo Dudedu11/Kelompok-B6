@@ -8,6 +8,7 @@ require (
 )
 
 require (
+	aph-go-service-master/database v0.0.0 // indirect
 	aph-go-service-master/datastruct v0.0.1 // indirect
 	aph-go-service-master/logging v0.0.1 // indirect
 	aph-go-service-master/service v0.0.1 // indirect
@@ -24,3 +25,5 @@ replace aph-go-service-master/datastruct => ./datastruct
 replace aph-go-service-master/logging => ./logging
 
 replace aph-go-service-master/service => ./service
+
+replace aph-go-service-master/database => ./database
