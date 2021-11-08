@@ -17,7 +17,7 @@ import {
 const Feed = () => {
     return (
         <View style={styles.container}>
-        
+        Like : nama_variable[0]['like'];
         <ScrollView>
             <View style={[styles.content]}>
             <View style={[styles.box]}>
