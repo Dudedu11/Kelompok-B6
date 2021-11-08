@@ -1,3 +1,3 @@
-module datastruct.go
+module datastruct
 
 go 1.17

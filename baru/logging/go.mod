@@ -1,3 +1,3 @@
-module logging.go
+module logging
 
 go 1.17

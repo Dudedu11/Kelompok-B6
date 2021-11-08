@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"strconv"
 
 	"aph-go-service-master/database"
 	"aph-go-service-master/datastruct"
@@ -23,6 +24,7 @@ type AphService interface {
 type aphService struct{}
 
 var ErrEmpty = errors.New("empty string")
+var columnInt = 25 
 
 func (aphService) MLikeService(_ context.Context, name string) string {
 
@@ -31,8 +33,10 @@ func (aphService) MLikeService(_ context.Context, name string) string {
 
 func call_ServiceMLike(name string) string {
 
-	jmlLike := database.SelectLike()
+	jmlLike := database.SelectLike(strconv.Itoa(columnInt))
 	Like := service.Mlike(name, jmlLike)
+
+	columnInt = database.UpdateLike(Like, strconv.Itoa(columnInt))
 
 	return Like
 

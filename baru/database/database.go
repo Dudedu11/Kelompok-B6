@@ -15,7 +15,7 @@ const (
 	dbhost = "localhost"
 	dbport = "5432"
 	dbuser = "postgres"
-	dbpass = "jeje2525"
+	dbpass = "virgo02"
 	dbname = "like_db"
 )
 
@@ -85,17 +85,17 @@ func dbConfig() map[string]string {
 	conf[dbhost] = "localhost"
 	conf[dbport] = "5432"
 	conf[dbuser] = "postgres"
-	conf[dbpass] = "jeje2525"
+	conf[dbpass] = "virgo02"
 	conf[dbname] = "like_db"
 	return conf
 }
 
-func SelectLike() string {
+func SelectLike(columnInt string) string {
 
 	var jml_lk int
 	likeSql := "SELECT jml_like FROM feed_like WHERE jml_like = $1"
 
-	err := db.QueryRow(likeSql,25).Scan(&jml_lk)
+	err := db.QueryRow(likeSql, columnInt).Scan(&jml_lk)
 	if err != nil {
 		if err == sql.ErrNoRows{
 			//there no row
@@ -107,4 +107,23 @@ func SelectLike() string {
 	
 	return strconv.Itoa(jml_lk)
 	
+}
+
+func UpdateLike(columnInt string, upt_lk string) int{
+
+	Uplike := "UPDATE feed_like SET jml_like = $2 WHERE jml_like = $1"
+
+	_,err := db.Exec(Uplike, upt_lk , columnInt)
+
+	if err != nil {
+		panic(err)
+	  }
+	//fmt.Printf("jumlah like: %d\n", upt_lk)
+	
+	column, err1 := strconv.Atoi(columnInt)
+	if err1 != nil {
+		panic(err)
+	}
+
+	return column
 }
