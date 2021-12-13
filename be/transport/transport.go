@@ -12,7 +12,6 @@ import (
 	"net/http"
 	"strconv"
 
-
 	"github.com/gorilla/mux"
 )
 
@@ -190,4 +189,89 @@ func UptLike(w http.ResponseWriter, r *http.Request) {
 	}
 
 	json.NewEncoder(w).Encode(res)
+}
+
+////////////////////////////BACKEND KOMENNNNN ///////////////////////////////////
+
+func TmbhKomen(w http.ResponseWriter, r *http.Request) {
+
+	w.Header().Set("Context-Type", "application/x-www-form-urlencoded")
+	w.Header().Set("Acce ss-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "POST")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+
+	var komen datastruct.Komen
+	var member datastruct.Member
+
+	err := json.NewDecoder(r.Body).Decode(&komen)
+	if err != nil {
+		log.Fatalf("Tidak bisa mendecode dari request body.  %v", err)
+	}
+	
+	getApiMember := fmt.Sprintf("https://61a9ef35bfb110001773efaa.mockapi.io/api/Member/%d", komen.User_id)
+	response, _ := http.Get(getApiMember)
+	if response.StatusCode != 200 {
+		w.WriteHeader(response.StatusCode) 
+		w.Write([]byte("Not found"))
+		return
+	} 
+
+	responseData, err := ioutil.ReadAll(response.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	json.Unmarshal(responseData, &member)
+
+	getApiFeed := fmt.Sprintf("https://61a9ef35bfb110001773efaa.mockapi.io/api/Feed/%d", komen.Feed_id)
+	response_, _ := http.Get(getApiFeed)
+	if response.StatusCode != 200 {
+		w.WriteHeader(response_.StatusCode) 
+		w.Write([]byte("Not found"))
+		return
+	} 
+
+
+	komen.Post_comment = logging.GetDateTimeNowInString()
+
+	service.TambahKomen(komen)
+
+	logging.Log(fmt.Sprintf("user dengan id %d mengomentari feed dengan id %d", komen.User_id, komen.Feed_id))
+
+	res := datastruct.Response5{
+		ID_user: komen.User_id,
+		Name_user: member.Username,
+		ID_feed: komen.Feed_id,
+		Message:  "Berhasil tambah komen",
+	}
+
+	w.WriteHeader(201)
+	json.NewEncoder(w).Encode(res)
+}
+
+func TmplknSemuaKomen(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Context-Type", "application/x-www-form-urlencoded")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	
+
+	params := mux.Vars(r)
+
+	id, err := strconv.Atoi(params["feed_id"])
+
+	if err != nil {
+		log.Fatalf("Tidak bisa mengubah dari string ke int.  %v", err)
+	}
+
+	likes, err := service.TampilAllKomen(int64(id))
+
+	if err != nil {
+		log.Fatalf("Tidak bisa mengambil data komen. %v", err)
+	}
+
+	var response datastruct.Response6
+	response.Status = 200
+	response.Message = "Success"
+	response.Data = likes
+
+	json.NewEncoder(w).Encode(response)
 }

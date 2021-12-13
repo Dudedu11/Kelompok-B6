@@ -3,6 +3,7 @@ package service
 import (
 	"be/config"
 	"be/datastruct"
+	"fmt"
 	"log"
 )
 
@@ -97,3 +98,76 @@ func UpdateLike(userid int64, feedid int64, suka datastruct.Menyukai) int64 {
 
 	return rowsAffected
 }
+
+/////// BACKEND KOMENN ////////
+
+func TambahKomen(komen datastruct.Komen)int64 {
+
+	// mengkoneksikan ke db postgres
+	db := config.CreateConnection()
+
+	// kita tutup koneksinya di akhir proses
+	defer db.Close()
+
+	// kita buat insert query
+	// mengembalikan nilai id akan mengembalikan id dari buku yang dimasukkan ke db
+	sqlStatement := `INSERT INTO comment (comment_id, feed_id, user_id, comment_text, post_comment) VALUES ($1, $2, $3, $4, $5) RETURNING comment_id`
+
+	// id yang dimasukkan akan disimpan di id ini
+	var comment_id int64
+
+	// Scan function akan menyimpan insert id didalam id id
+	err := db.QueryRow(sqlStatement, komen.Comment_ID, komen.Feed_id, komen.User_id, komen.Comment_text, komen.Post_comment).Scan(&comment_id)
+
+	if err != nil {
+		log.Fatalf("Tidak Bisa mengeksekusi query. %v", err)
+	}
+
+	fmt.Printf("Insert data single record %v", comment_id)
+
+	// return insert id
+	return comment_id
+}
+
+func TampilAllKomen(id int64) ([]datastruct.Komen, error) {
+	// mengkoneksikan ke db postgres
+	db := config.CreateConnection()
+
+	// kita tutup koneksinya di akhir proses
+	defer db.Close()
+
+	var tampilK []datastruct.Komen
+
+	// kita buat select query
+	sqlStatement := `SELECT * FROM comment WHERE feed_id = $1`
+
+	// mengeksekusi sql query
+	rows, err := db.Query(sqlStatement, id)
+
+	if err != nil {
+		log.Fatalf("tidak bisa mengeksekusi query. %v", err)
+	}
+
+	// kita tutup eksekusi proses sql qeurynya
+	defer rows.Close()
+
+	// kita iterasi mengambil datanya
+	for rows.Next() {
+		var kmen datastruct.Komen
+
+		// kita ambil datanya dan unmarshal ke structnya
+		err = rows.Scan(&kmen.Comment_ID, &kmen.Feed_id, &kmen.User_id, &kmen.Comment_text, &kmen.Post_comment)
+
+		if err != nil {
+			log.Fatalf("tidak bisa mengambil data. %v", err)
+		}
+
+		// masukkan kedalam slice bukus
+		tampilK = append(tampilK, kmen)
+
+	}
+
+	// return empty buku atau jika error
+	return tampilK, err
+}
+

@@ -1,10 +1,10 @@
 package datastruct
 
-type   Menyukai struct {
-	User_id  	int64  `json:"user_id"`
-	Feed_id  	int64  `json:"feed_id"`
-	Status_like bool `json:"status_like"`
-	Tgl_like 	string `json:"tgl_like"`
+type Menyukai struct {
+	User_id     int64  `json:"user_id"`
+	Feed_id     int64  `json:"feed_id"`
+	Status_like bool   `json:"status_like"`
+	Tgl_like    string `json:"tgl_like"`
 }
 
 type Member struct {
@@ -28,34 +28,54 @@ type Member struct {
 }
 
 type Feed struct {
-    Image_feed   string `json:"image_feed"`
+	Image_feed   string `json:"image_feed"`
 	Caption_feed string `json:"caption_feed"`
-	Post_date	 string	`json:"post_date"`
+	Post_date    string `json:"post_date"`
 	Feed_id      string `json:"feed_id"`
-	
 }
 
 type Response1 struct {
-	ID_user 	int64  `json:"id_user,omitempty"`
-	Name_user 	string `json:"name_user,omitempty"`
-	ID_feed 	int64  `json:"id_feed,omitempty"`
-	Is_like  	bool   `json:"is_like,omitempty"`
-	Message     string `json:"message,omitempty"`
+	ID_user   int64  `json:"id_user,omitempty"`
+	Name_user string `json:"name_user,omitempty"`
+	ID_feed   int64  `json:"id_feed,omitempty"`
+	Is_like   bool   `json:"is_like,omitempty"`
+	Message   string `json:"message,omitempty"`
 }
 
 type Response2 struct {
-	Status  int     `json:"status"`
-	Message string  `json:"message"`
+	Status  int        `json:"status"`
+	Message string     `json:"message"`
 	Data    []Menyukai `json:"data"`
 }
 
 type Response3 struct {
-	Status     int      `json:"status"`
-	Message    string   `json:"message"`
-	JumlahLike int64      `json:"jml_like"`
+	Status     int    `json:"status"`
+	Message    string `json:"message"`
+	JumlahLike int64  `json:"jml_like"`
 }
 
 type Response4 struct {
-	Status     int      `json:"status"`
-	Message    string   `json:"message"`
+	Status  int    `json:"status"`
+	Message string `json:"message"`
+}
+
+type Komen struct {
+	Comment_ID   int64  `json:"comment_id"`
+	Feed_id      int64  `json:"feed_id"`
+	User_id      int64  `json:"user_id"`
+	Comment_text string `json:"comment_text"`
+	Post_comment string `json:"post_comment"`
+}
+
+type Response5 struct {
+	ID_user   int64  `json:"id_user,omitempty"`
+	Name_user string `json:"name_user,omitempty"`
+	ID_feed   int64  `json:"id_feed,omitempty"`
+	Message   string `json:"message,omitempty"`
+}
+
+type Response6 struct {
+	Status  int     `json:"status"`
+	Message string  `json:"message"`
+	Data    []Komen `json:"data"`
 }
