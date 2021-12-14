@@ -79,3 +79,9 @@ type Response6 struct {
 	Message string  `json:"message"`
 	Data    []Komen `json:"data"`
 }
+
+type Response7 struct {
+	Status      int    `json:"status"`
+	Message     string `json:"message"`
+	JumlahKomen int64  `json:"jml_komen"`
+}

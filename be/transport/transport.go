@@ -275,3 +275,54 @@ func TmplknSemuaKomen(w http.ResponseWriter, r *http.Request) {
 
 	json.NewEncoder(w).Encode(response)
 }
+
+func TmplkanJumlahKomen(w http.ResponseWriter, r *http.Request) {
+
+	w.Header().Set("Context-Type", "application/x-www-form-urlencoded")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+
+	var getAPIMember string
+	var post datastruct.Feed
+
+	params := mux.Vars(r)
+
+	id, err := strconv.Atoi(params["feed_id"])
+
+	if err != nil {
+		log.Fatalf("Tidak bisa mengubah dari string ke int.  %v", err)
+	}
+
+	jmlKomen  := service.TmplJmlKomen(int64(id))
+
+	if err != nil {
+		log.Fatalf("Tidak bisa mengambil data. %v", err)
+	}
+
+	
+	getAPIMember = fmt.Sprintf("https://61a9ef35bfb110001773efaa.mockapi.io/api//Feed/%d", id)
+
+	response, _ := http.Get(getAPIMember)
+		if response.StatusCode != 200 {
+			w.WriteHeader(response.StatusCode)
+			w.Write([]byte("Not found"))
+			return
+		}
+
+		responseData, err := ioutil.ReadAll(response.Body)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		json.Unmarshal(responseData, &post)
+
+		logging.Log(fmt.Sprintf("%d menampilkan data like", id))
+
+	response3:= datastruct.Response7{
+		Status: 200,
+		Message: "Success",
+		JumlahKomen: jmlKomen,
+	}
+	
+	w.WriteHeader(200)
+	json.NewEncoder(w).Encode(response3)
+}

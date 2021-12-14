@@ -171,3 +171,22 @@ func TampilAllKomen(id int64) ([]datastruct.Komen, error) {
 	return tampilK, err
 }
 
+func TmplJmlKomen(id int64) (int64) {
+	db := config.CreateConnection()
+
+	defer db.Close()
+
+	var sqlStatement string
+	var count int64
+
+	sqlStatement = `SELECT COUNT(*) FROM comment WHERE feed_id=$1 AND comment_id IS NOT NULL`
+
+
+	err := db.QueryRow(sqlStatement, id).Scan(&count)
+
+	if err != nil {
+		log.Fatalf("tidak bisa mengeksekusi query. %v", err)
+	}
+
+	return count
+}

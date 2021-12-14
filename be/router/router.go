@@ -17,6 +17,7 @@ func Router() *mux.Router {
 
 	router.HandleFunc("/api/komen", transport.TmbhKomen).Methods("POST", "OPTIONS")
 	router.HandleFunc("/api/komen/{feed_id}", transport.TmplknSemuaKomen).Methods("GET", "OPTIONS")
-
+	router.HandleFunc("/api/jmlKomen/{feed_id}", transport.TmplkanJumlahKomen).Methods("GET", "OPTIONS")
+	
 	return router
 }
